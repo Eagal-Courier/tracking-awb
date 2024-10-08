@@ -24,3 +24,9 @@ hbs.registerPartials(path.join(__dirname, "templates", "partials"));
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });
+
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Hello from Vercel" });
+});
+
+module.exports = app;
