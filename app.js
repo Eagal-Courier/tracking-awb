@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cheerio = require("cheerio");
-const path = require("path"); 
 
 const rajAirTracking = async (awbNo) => {
   const extractedAWBNo = awbNo.substring(3);
@@ -12,7 +11,7 @@ const rajAirTracking = async (awbNo) => {
     // resultContainer;
     // shipmenthistory;
     const trackingData = $("#resultContainer").html();
-    return trackingData; // Return the extracted data
+    return trackingData;
   } catch (error) {
     console.error("Error calling API:", error.message);
   }
@@ -20,8 +19,6 @@ const rajAirTracking = async (awbNo) => {
 
 const hbs = require("hbs");
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "templates", "pages"));
-
 
 app.get("/", async (req, res) => {
   res.status(200).render("home");
