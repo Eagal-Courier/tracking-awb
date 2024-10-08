@@ -3,6 +3,9 @@ const app = express();
 
 const axios = require("axios");
 const cheerio = require("cheerio");
+const hbs = require("hbs");
+app.set("view engine", "hbs");
+app.set("views", __dirname + "/views");
 
 const rajAirTracking = async (awbNo) => {
   const extractedAWBNo = awbNo.substring(3);
@@ -10,17 +13,12 @@ const rajAirTracking = async (awbNo) => {
   try {
     const response = await axios.get(apiUrl);
     const $ = cheerio.load(response.data);
-    // resultContainer;
-    // shipmenthistory;
     const trackingData = $("#resultContainer").html();
     return trackingData;
   } catch (error) {
     console.error("Error calling API:", error.message);
   }
 };
-
-const hbs = require("hbs");
-app.set("view engine", "hbs");
 
 app.get("/", async (req, res) => {
   res.status(200).render("home");
