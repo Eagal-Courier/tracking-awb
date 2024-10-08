@@ -23,7 +23,7 @@ app.set("view engine", "hbs");
 app.get("/", async (req, res) => {
   res.status(200).render("home");
 });
-app.post("/", async (req, res) => {
+app.post("/individualAWBId", async (req, res) => {
   const AWB_ID = req.body.AWB_ID;
 
   const apiData = await rajAirTracking(AWB_ID);
