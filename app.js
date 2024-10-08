@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
-
+const path = require("path");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const hbs = require("hbs");
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
 
 const rajAirTracking = async (awbNo) => {
   const extractedAWBNo = awbNo.substring(3);
@@ -33,4 +36,5 @@ app.post("/individualAWBId", async (req, res) => {
     data: apiData,
   });
 });
+app.listen("1234");
 module.exports = app;
